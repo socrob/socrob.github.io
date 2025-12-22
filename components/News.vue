@@ -73,6 +73,12 @@ export default defineComponent({
   setup() {
     const news = ref([
       {
+        title: 'AI-Driven Task & Motion Planning for Service Robots with Oracle Cloud Infrastructure',
+        type: 'Blog Post',
+        source: 'Oracle AI & Data Science Blog',
+        link: 'https://blogs.oracle.com/ai-and-datascience/ai-driven-task-motion-planning-service-robots-with-oci',
+      },
+      {
         title: 'CNN Inovação: episódio dedicado ao Departamento de Engenharia Eletrotécnica e de Computadores (DEEC)',
         type: 'Media',
         source: 'CNN Portugal via DEEC Técnico',
