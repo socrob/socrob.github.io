@@ -1,64 +1,142 @@
 .media_icon {
     font-size: var(--big-font-size);
     color: var(--text-color);
-    opacity: 70%;
+    opacity: 0.7;
 }
 
 .media__container {
-    max-width: 600px;
-    margin: auto;
+    --media-border: hsla(var(--hue-color), 25%, 55%, 0.2);
+    display: grid;
+    gap: 2.5rem;
+    max-width: 900px;
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+}
+
+.media__intro {
+    max-width: 640px;
+    margin-inline: auto;
     text-align: center;
-  }
-  
-  .video-container {
-    margin-bottom: 20px;
-    width: 100%; /* Make the video container full width */
-    position: relative; /* Positioning for responsive aspect ratio */
-    padding-top: 56.25%; /* 16:9 Aspect Ratio */
-  }
-  
-  .video-container iframe {
-    position: absolute; /* Position it absolutely within the container */
-    top: 0;
-    left: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-  }
-  
-  .media__description {
-    margin-top: 40px;
-    font-size: 1rem;
-    color: #444;
-  }
-  
-  .youtube-link {
-    color: var(--second-color);;
-    /* text-decoration: underline; */
-  }
-  
-  /* Media queries for responsive design */
-  @media (max-width: 650px) {
-    .media__description {
-      font-size: 0.9rem; /* Slightly smaller text on smaller screens */
+    font-size: var(--small-font-size);
+    line-height: 1.8;
+}
+
+.media__grid {
+    display: grid;
+    gap: 1.25rem;
+}
+
+.media-card {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid var(--media-border);
+    border-radius: 1rem;
+    background: var(--container-color);
+    box-shadow: 0 6px 24px hsla(var(--hue-color), 30%, 20%, 0.04);
+}
+
+.media-card__player {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #000;
+
+    iframe {
+        display: block;
+        width: 100%;
+        height: 100%;
+        border: 0;
+    }
+}
+
+.media-card__body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.5rem;
+
+    h3 {
+        font-size: var(--h3-font-size);
+        line-height: 1.5;
     }
 
-    .media__container {
-    max-width: 500px;
-    }
-  }
-  
-  @media (min-width: 601px) and (max-width: 900px) {
-    .media__description {
-      font-size: 0.9rem; /* Adjust text size for medium screens */
-    }
-  }
-
-  @media (max-width: 540px) {
-    .media__description {
-      font-size: 0.9rem; /* Slightly smaller text on smaller screens */
+    p {
+        font-size: var(--small-font-size);
+        line-height: 1.8;
     }
 
-    .media__container {
-    max-width: 300px;
+    a {
+        margin-top: auto;
     }
-  }
+}
+
+.media-card__label {
+    padding: 0.3rem 0.65rem;
+    border-radius: 0.5rem;
+    background: hsla(var(--hue-color), 69%, 61%, 0.1);
+    color: var(--text-color);
+    font-size: var(--smaller-font-size);
+    font-weight: var(--font-medium);
+    line-height: 1.6;
+}
+
+.media__container a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 44px;
+    color: var(--title-color);
+    font-size: var(--small-font-size);
+    font-weight: var(--font-medium);
+    text-decoration: underline;
+    text-decoration-color: var(--first-color);
+    text-underline-offset: 0.2em;
+
+    .v-icon {
+        flex-shrink: 0;
+        color: var(--first-color);
+        font-size: 1.1rem;
+    }
+
+    &:hover {
+        color: var(--first-color);
+    }
+
+    &:focus-visible {
+        outline: 2px solid var(--first-color);
+        outline-offset: 4px;
+        border-radius: 0.2rem;
+    }
+}
+
+.media-card__player iframe:focus-visible {
+    outline: 3px solid var(--first-color);
+    outline-offset: -3px;
+}
+
+.media__channel {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.5rem;
+    border-left: 3px solid var(--first-color);
+    border-radius: 0 1rem 1rem 0;
+    background: hsla(var(--hue-color), 69%, 61%, 0.05);
+
+    p {
+        flex: 1 1 280px;
+        font-size: var(--small-font-size);
+        line-height: 1.8;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .media__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
