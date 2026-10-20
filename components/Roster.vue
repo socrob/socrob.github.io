@@ -38,7 +38,7 @@
 
 <script setup lang="ts">
 const teamMembers = [
-    { name: "Pedro Lima", position: "Project Coordinator", image: "/team/current_members/pedroLima.jpeg" },
+    { name: "Prof. Pedro Lima", position: "Project Coordinator", image: "/team/current_members/pedroLima.jpeg" },
     { name: "Rodrigo Serra", position: "Team Leader", image: "/team/current_members/rodrigoSerra.jpeg" },
     { name: "Rui Bettencourt", position: "PhD Student", image: "/team/current_members/ruiBettencourt.jpeg" },
     { name: "Afonso Certo", position: "PhD Student", image: "/team/current_members/afonsoCerto.jpeg" },

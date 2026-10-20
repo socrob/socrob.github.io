@@ -116,7 +116,9 @@ const robots: Robot[] = [
             "Unitree LiDAR",
             "2xHokuyo Laser",
             "Jetson Xavier NX",
-            "ASUS RT-BE88U Router"
+            "ASUS RT-BE88U Router",
+            "Intel NUC Kit",
+            "ELO touchscreen",
         ],
         source: null
     },
@@ -164,6 +166,7 @@ const robots: Robot[] = [
         hardware: [
             "Touchscreen on a laptop for HRI",
             "Hokuyo UTM-30LX",
+            "Katana 300 Manipulator Arm",
             "Kinect RGB-D",
             "IP PTZ camera",
             "Rode Mic"

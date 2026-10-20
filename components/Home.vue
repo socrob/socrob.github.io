@@ -5,7 +5,7 @@
                 <div class="home__data">
                     <span class="home__eyebrow">Service robotics · Lisbon, Portugal</span>
                     <h1 class="home__title">We are <span>SocRob@Home</span></h1>
-                    <p class="home__subtitle">Robots that understand, interact, and assist.</p>
+                    <p class="home__subtitle">Advancing autonomous service robotics through research and competitions.</p>
                     <p class="home__description">
                         Based at the Institute for Systems and Robotics, we explore how
                         autonomous robots can work alongside people in everyday environments.
