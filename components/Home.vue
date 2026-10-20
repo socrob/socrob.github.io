@@ -1,95 +1,73 @@
 <template>
-    <section className="home section" id="home">
-        <div class="home__container container grid">
-        <div class="home__content grid">
-            <!-- Social Links -->
-            <div class="home__social">
-                <a
-                href="https://www.instagram.com/socrobhome/"
-                target="_blank"
-                rel="noreferrer"
-                class="home__social-icon"
-                >
-                <v-icon>mdi-instagram</v-icon>
-                </a>
-                <a
-                href="https://www.linkedin.com/company/socrob-home/"
-                target="_blank"
-                rel="noreferrer"
-                class="home__social-icon"
-                >
-                <v-icon>mdi-linkedin</v-icon>
-                </a>
-                <a
-                href="https://www.youtube.com/@socrob_home"
-                target="_blank"
-                rel="noreferrer"
-                class="home__social-icon"
-                >
-                <v-icon>mdi-youtube</v-icon>
-                </a>
-                <a
-                href="https://github.com/socrob"
-                target="_blank"
-                rel="noreferrer"
-                class="home__social-icon"
-                >
-                <v-icon>mdi-github</v-icon>
-                </a>
-            </div>
-    
-            <!-- Profile Image in SVG Blob -->
-            <!-- <div class="home__img">
-            <svg class="home__blob" viewBox="0 0 200 187" xmlns="http://www.w3.org/2000/svg">
-                <mask id="mask0" mask-type="alpha">
-                <path
-                    d="M190.312 36.4879C206.582 62.1187 201.309 102.826 182.328 134.186C163.346 165.547 
-                    130.807 187.559 100.226 186.353C69.6454 185.297 41.0228 161.023 21.7403 129.362C2.45775 
-                    97.8511 -7.48481 59.1033 6.67581 34.5279C20.9871 10.1032 59.7028 -0.149132 97.9666 
-                    0.00163737C136.23 0.303176 174.193 10.857 190.312 36.4879Z" />
-                </mask>
-                <g mask="url(#mask0)">
-                <path
-                    d="M190.312 36.4879C206.582 62.1187 201.309 102.826 182.328 134.186C163.346 
-                    165.547 130.807 187.559 100.226 186.353C69.6454 185.297 41.0228 161.023 21.7403 
-                    129.362C2.45775 97.8511 -7.48481 59.1033 6.67581 34.5279C20.9871 10.1032 59.7028 
-                    -0.149132 97.9666 0.00163737C136.23 0.303176 174.193 10.857 190.312 36.4879Z" />
-                <image class="home__blob-img" href="@/public/logos/socrob_home_logo.png" x="35" y="18" />
-                </g>
-            </svg>
-            </div> -->
+    <section class="home section" id="home">
+        <div class="home__container container">
+            <div class="home__content">
+                <div class="home__data">
+                    <span class="home__eyebrow">Service robotics · Lisbon, Portugal</span>
+                    <h1 class="home__title">We are <span>SocRob@Home</span></h1>
+                    <p class="home__subtitle">Robots that understand, interact, and assist.</p>
+                    <p class="home__description">
+                        Based at the Institute for Systems and Robotics, we explore how
+                        autonomous robots can work alongside people in everyday environments.
+                    </p>
+                    <div class="home__actions">
+                        <a href="#about" class="home__button home__button--primary">
+                            Meet the team
+                            <v-icon aria-hidden="true">mdi-arrow-right</v-icon>
+                        </a>
+                        <a
+                            href="https://irs-group.github.io/socrobwebsite/tdp/TeamDescriptionPaper2026_v2.pdf"
+                            download="TeamDescriptionPaper2026_v2.pdf"
+                            target="_blank"
+                            rel="noreferrer"
+                            class="home__button home__button--secondary"
+                        >
+                            Team Description Paper
+                            <v-icon aria-hidden="true">mdi-book-arrow-down-outline</v-icon>
+                        </a>
+                    </div>
+                </div>
 
-            <!-- Profile Image -->
-            <div class="home__img">
-                <img src="/logos/socrob_home_logo.png" alt="Profile Image" class="home__profile-img" />
+                <div class="home__identity">
+                    <img
+                        src="/logos/socrob_home_logo.png"
+                        alt="SocRob@Home logo"
+                        class="home__logo"
+                        width="200"
+                        height="238"
+                    />
+                    <span class="home__identity-caption">Research. Collaboration. Competition.</span>
+                </div>
             </div>
-    
-            <!-- Content Data -->
-            <div class="home__data">
-                <h1 class="home__title">Hi there</h1>
-                <h3 class="home__subtitle">
-                    We are SocRob@Home
-                    <v-icon class="home__bulb-icon">mdi-robot</v-icon>
-                </h3>
-                <p class="home__description">Institute for Systems & Robotics</p>
-        
-                <a href="https://irs-group.github.io/socrobwebsite/tdp/TeamDescriptionPaper2026_v2.pdf" download="TeamDescriptionPaper2026_v2.pdf" target="_blank"class="home_button_link button--flex">
-                    Team Description Paper
-                    <v-icon>mdi-book-arrow-down-outline</v-icon>
-                </a>
-                <!-- <a href="/tdp/TeamDescriptionPaper.pdf" download="TeamDescriptionPaper.pdf" target="_blank"class="home_button_link button--flex">
-                    Team Description Paper
-                    <v-icon>mdi-book-arrow-down-outline</v-icon>
-                </a> -->
+
+            <div class="home__footer">
+                <span class="home__social-label">Follow our work</span>
+                <nav class="home__social" aria-label="SocRob@Home social profiles">
+                    <a
+                        v-for="link in socialLinks"
+                        :key="link.name"
+                        :href="link.url"
+                        target="_blank"
+                        rel="noreferrer"
+                        class="home__social-link"
+                        :aria-label="`SocRob@Home on ${link.name}`"
+                        :title="link.name"
+                    >
+                        <v-icon aria-hidden="true">{{ link.icon }}</v-icon>
+                    </a>
+                </nav>
             </div>
-        </div>
         </div>
     </section>
-  </template>
-  
-  <script setup>
-  // No specific script required for this component as it's mostly static.
-  </script>
-  
-  <style scoped lang="scss" src="@/assets/home.scss"></style>
-  
+</template>
+
+<script setup lang="ts">
+const socialLinks = [
+    { name: 'Instagram', url: 'https://www.instagram.com/socrobhome/', icon: 'mdi-instagram' },
+    { name: 'LinkedIn', url: 'https://www.linkedin.com/company/socrob-home/', icon: 'mdi-linkedin' },
+    { name: 'YouTube', url: 'https://www.youtube.com/@socrob_home', icon: 'mdi-youtube' },
+    { name: 'GitHub', url: 'https://github.com/socrob', icon: 'mdi-github' },
+]
+</script>
+
+<style scoped lang="scss" src="@/assets/home.scss"></style>
