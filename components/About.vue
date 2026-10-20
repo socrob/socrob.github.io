@@ -1,75 +1,130 @@
 <template>
-    <section className="about section" id="about">
+    <section class="about section" id="about">
         <h2 class="section__title">About the Team</h2>
         <span class="section__subtitle">
-            <v-icon class="about_icon">mdi-account-outline</v-icon>
+            <v-icon class="about_icon" aria-hidden="true">mdi-account-outline</v-icon>
         </span>
 
-        <div class="about__container container grid">
-            <!-- Vuetify Carousel for Images -->
-            <v-carousel hide-delimiters cycle :show-arrows="false" class="about__carousel">
-                <!-- <v-carousel-item v-for="(image, i) in images" :key="i">
-                    <img src="/about/1.png" class="about__img" />
-                </v-carousel-item> -->
-                <v-carousel-item>
-                    <!-- <v-img :src="image" class="about__img" /> -->
-                    <img src="/about/1.jpeg" class="about__img" />
-                </v-carousel-item>
-                <v-carousel-item>
-                    <!-- <v-img :src="image" class="about__img" /> -->
-                    <img src="/about/2.jpeg" class="about__img" />
-                </v-carousel-item>
-                <v-carousel-item>
-                    <!-- <v-img :src="image" class="about__img" /> -->
-                    <img src="/about/3.jpeg" class="about__img" />
-                </v-carousel-item>
-                <v-carousel-item>
-                    <!-- <v-img :src="image" class="about__img" /> -->
-                    <img src="/about/8.jpeg" class="about__img" />
-                </v-carousel-item>
-                <v-carousel-item>
-                    <!-- <v-img :src="image" class="about__img" /> -->
-                    <img src="/about/4.jpeg" class="about__img" />
-                </v-carousel-item>
-                <v-carousel-item>
-                    <!-- <v-img :src="image" class="about__img" /> -->
-                    <img src="/about/5.jpeg" class="about__img" />
-                </v-carousel-item>
-                <v-carousel-item>
-                    <!-- <v-img :src="image" class="about__img" /> -->
-                    <img src="/about/6.jpeg" class="about__img" />
-                </v-carousel-item>
-                <v-carousel-item>
-                    <!-- <v-img :src="image" class="about__img" /> -->
-                    <img src="/about/7.jpeg" class="about__img" />
-                </v-carousel-item>
-            </v-carousel>
+        <div class="about__container container">
+            <div class="about__overview">
+                <div class="about__gallery">
+                    <v-carousel
+                        height="auto"
+                        show-arrows
+                        hide-delimiter-background
+                        color="white"
+                        class="about__carousel"
+                        aria-label="SocRob@Home photo gallery"
+                    >
+                        <v-carousel-item v-for="image in images" :key="image.src">
+                            <img :src="image.src" :alt="image.alt" class="about__img" loading="lazy" />
+                        </v-carousel-item>
+                    </v-carousel>
+                </div>
 
-            <!-- Text Section -->
-            <div class="about__data">
-                <p class="about__description">
-                    The Intelligent Robots and Systems research group at the <a href="https://welcome.isr.tecnico.ulisboa.pt/" class="about_text_link" target="_blank" rel="noreferrer">Intelligent for Systems and Robotics</a> has led significant EU-funded projects focused on human-robot interactions and social behaviors. One notable initiative, the MOnarCH project, aimed to equip autonomous robots with capabilities to engage and entertain children facing health challenges, particularly those undergoing cancer treatment at the Instituto Português de Oncologia Francisco Gentil in Lisbon (IPO).
-                </p>
-                <p class="about__description">
-                    Following this, from 2013 to 2015, the RoCKIn project involved competitions designed to evaluate new benchmark methods in domestic and work environments, addressing complex challenges faced by state-of-the-art robots. Inspired by the success of these projects, we formed the SocRob@Home team, a dedicated group ready to tackle future challenges in robotics, including those presented in scientific competitions.
-                </p>
-                <p class="about__description">
-                    Our focus encompasses key areas such as perception and sensor fusion, decision-making under uncertainty, human-robot interaction, and manipulation and grasping. Together, we aim to advance the field of robotics and enhance the interactions between robots and their environments.
-                </p>
-                <p class="about__description">
-                    This is our newly launched website for 2025 and beyond. For additional details on our project history, you can look into our previous website <a href="https://irsgroup.isr.tecnico.ulisboa.pt/projects/socrob-home/" class="about_text_link" target="_blank" rel="noreferrer">here</a>.
-                </p>
+                <div class="about__introduction">
+                    <span class="about__eyebrow">SocRob@Home · Lisbon</span>
+                    <h3>Building robots for everyday life</h3>
+                    <p>
+                        We bring together research in autonomous robots and human–robot
+                        interaction to explore how robots can understand, assist, and
+                        interact with people in everyday environments.
+                    </p>
+                    <p>
+                        Our team grew out of the Intelligent Robots and Systems research
+                        group at the
+                        <a href="https://welcome.isr.tecnico.ulisboa.pt/" target="_blank" rel="noreferrer">
+                            Institute for Systems and Robotics
+                        </a>.
+                        We build on that research through service robotics and scientific competitions.
+                    </p>
+                    <a class="about__action" href="#competitions">
+                        Explore our competitions
+                        <v-icon aria-hidden="true">mdi-arrow-right</v-icon>
+                    </a>
+                </div>
+            </div>
+
+            <div class="about__research" aria-labelledby="about-research-title">
+                <div class="about__heading">
+                    <h3 id="about-research-title">What we work on</h3>
+                    <p>Four connected areas of service robotics.</p>
+                </div>
+                <div class="about__cards">
+                    <article v-for="area in researchAreas" :key="area.title" class="about-card">
+                        <v-icon class="about-card__icon" aria-hidden="true">{{ area.icon }}</v-icon>
+                        <h4>{{ area.title }}</h4>
+                        <p>{{ area.description }}</p>
+                    </article>
+                </div>
+            </div>
+
+            <div class="about__story" aria-labelledby="about-story-title">
+                <div class="about__heading">
+                    <h3 id="about-story-title">Research roots, real-world challenges</h3>
+                    <p>The projects that helped shape SocRob@Home.</p>
+                </div>
+                <div class="about__projects">
+                    <div class="about__project">
+                        <h4>MOnarCH</h4>
+                        <p>
+                            The group’s work on human–robot interaction and social behaviour
+                            included MOnarCH, an EU-funded project developing autonomous robots
+                            to engage and entertain children undergoing cancer treatment at
+                            the Instituto Português de Oncologia Francisco Gentil in Lisbon (IPO).
+                        </p>
+                    </div>
+                    <div class="about__project">
+                        <h4>RoCKIn <span>2013–2015</span></h4>
+                        <p>
+                            RoCKIn used competitions to evaluate robotics through benchmarks
+                            in domestic and work environments. Building on these projects,
+                            we formed SocRob@Home to take on new research challenges through
+                            scientific competitions.
+                        </p>
+                    </div>
+                </div>
+                <a
+                    class="about__action"
+                    href="https://irsgroup.isr.tecnico.ulisboa.pt/projects/socrob-home/"
+                    target="_blank"
+                    rel="noreferrer"
+                >
+                    Visit our project archive
+                    <v-icon aria-hidden="true">mdi-open-in-new</v-icon>
+                </a>
             </div>
         </div>
     </section>
 </template>
 
 <script setup lang="ts">
-// Array of image paths for the slider
-const images = [
-    '/about/1.png',
-    '/about/2.png',
-    '/about/3.png'
+const images = Array.from({ length: 11 }, (_, index) => ({
+    src: `/about/${11 - index}.jpeg`,
+    alt: `SocRob@Home team activities — gallery photo ${index + 1} of 11`,
+}))
+
+const researchAreas = [
+    {
+        title: 'Perception & sensor fusion',
+        description: 'Combining sensory information to help robots understand their surroundings.',
+        icon: 'mdi-eye-outline',
+    },
+    {
+        title: 'Decision-making under uncertainty',
+        description: 'Choosing how to act when information about the world is incomplete.',
+        icon: 'mdi-routes',
+    },
+    {
+        title: 'Human–robot interaction',
+        description: 'Exploring how robots can communicate and engage with people.',
+        icon: 'mdi-account-group-outline',
+    },
+    {
+        title: 'Manipulation & grasping',
+        description: 'Enabling robots to handle objects and interact with their environment.',
+        icon: 'mdi-robot-industrial-outline',
+    },
 ]
 </script>
 
