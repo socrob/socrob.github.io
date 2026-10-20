@@ -80,7 +80,15 @@
     box-shadow: inset 0 -2px var(--first-color);
 }
 
-.nav__toggle {
+.nav__actions {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    gap: 0.5rem;
+}
+
+.nav__toggle,
+.nav__theme {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -91,6 +99,11 @@
     color: var(--title-color);
     background: var(--container-color);
     cursor: pointer;
+
+    &:hover {
+        border-color: var(--first-color);
+        background: hsla(var(--hue-color), 69%, 61%, 0.12);
+    }
 }
 
 .nav :is(a, button):focus-visible {

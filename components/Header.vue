@@ -17,17 +17,50 @@
                 </ul>
             </div>
 
-            <button ref="menuButton" class="nav__toggle" type="button" aria-controls="nav-menu"
-                :aria-expanded="activeMenu" :aria-label="activeMenu ? 'Close navigation' : 'Open navigation'"
-                @click="toggleMenu">
-                <v-icon aria-hidden="true">{{ activeMenu ? 'mdi-close' : 'mdi-menu' }}</v-icon>
-            </button>
+            <div class="nav__actions">
+                <button class="nav__theme" type="button" :aria-pressed="isDark"
+                    :aria-label="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
+                    :title="isDark ? 'Switch to light mode' : 'Switch to dark mode'" @click="toggleTheme">
+                    <v-icon aria-hidden="true">{{ isDark ? 'mdi-white-balance-sunny' : 'mdi-moon-waning-crescent' }}</v-icon>
+                </button>
+                <button ref="menuButton" class="nav__toggle" type="button" aria-controls="nav-menu"
+                    :aria-expanded="activeMenu" :aria-label="activeMenu ? 'Close navigation' : 'Open navigation'"
+                    @click="toggleMenu">
+                    <v-icon aria-hidden="true">{{ activeMenu ? 'mdi-close' : 'mdi-menu' }}</v-icon>
+                </button>
+            </div>
         </nav>
     </header>
 </template>
 
 <script setup lang="ts">
 import { nextTick, onMounted, onUnmounted, ref } from 'vue'
+import { useTheme } from 'vuetify'
+
+const theme = useTheme()
+const isDark = ref(false)
+let hasThemePreference = false
+let systemTheme: MediaQueryList | null = null
+
+const applyTheme = (dark: boolean) => {
+    isDark.value = dark
+    document.body.classList.toggle('dark-theme', dark)
+    theme.global.name.value = dark ? 'dark' : 'light'
+}
+
+const toggleTheme = () => {
+    applyTheme(!isDark.value)
+    hasThemePreference = true
+    try {
+        localStorage.setItem('selected-theme', isDark.value ? 'dark' : 'light')
+    } catch {
+        // The toggle still works for this visit when storage is unavailable.
+    }
+}
+
+const onSystemThemeChange = (event: MediaQueryListEvent) => {
+    if (!hasThemePreference) applyTheme(event.matches)
+}
 
 const headerElement = ref<HTMLElement | null>(null)
 const menuElement = ref<HTMLElement | null>(null)
@@ -102,12 +135,16 @@ const scheduleUpdate = () => {
 }
 
 onMounted(() => {
+    systemTheme = window.matchMedia('(prefers-color-scheme: dark)')
+    let selectedTheme: string | null = null
     try {
-        const selectedTheme = localStorage.getItem('selected-theme')
-        if (selectedTheme) document.body.classList.toggle('dark-theme', selectedTheme === 'dark')
+        selectedTheme = localStorage.getItem('selected-theme')
     } catch {
-        // Navigation remains available when browser storage is disabled.
+        // Fall back to the device preference when storage is unavailable.
     }
+    hasThemePreference = selectedTheme === 'dark' || selectedTheme === 'light'
+    applyTheme(hasThemePreference ? selectedTheme === 'dark' : systemTheme.matches)
+    systemTheme.addEventListener('change', onSystemThemeChange)
     updateNavigation()
     window.addEventListener('scroll', scheduleUpdate, { passive: true })
     window.addEventListener('resize', scheduleUpdate)
@@ -117,6 +154,7 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
+    systemTheme?.removeEventListener('change', onSystemThemeChange)
     if (frame !== null) window.cancelAnimationFrame(frame)
     window.removeEventListener('scroll', scheduleUpdate)
     window.removeEventListener('resize', scheduleUpdate)

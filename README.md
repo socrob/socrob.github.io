@@ -67,6 +67,4 @@ Original deployment references:
 
 ## Future Work
 
-- [ ] Fix night mode display issues
-- [ ] Resolve image path and `v-for` issues on deployment
-- [ ] Improve the "Publications" section with better styling and layout
+- [ ] TODO
