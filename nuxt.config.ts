@@ -27,11 +27,12 @@ export default defineNuxtConfig({
     },
   },
   css: [
-    '/assets/custom-theme.scss',
+    '~/assets/custom-theme.scss',
   ],
   app: {
-    baseURL: '/socrobwebsite/',  // Adjust this to match your GitHub Pages repo name
-    buildAssetsDir: 'assets',
+    baseURL: '/',  // Same root path for local development and socrob.github.io
+    // Avoid a collision with the source assets/ folder during development.
+    buildAssetsDir: process.env.NODE_ENV === 'development' ? '/_nuxt/' : 'assets',
     head: {
       title: 'SocRob@Home', // Your app title
       meta: [
@@ -46,7 +47,7 @@ export default defineNuxtConfig({
         { name: 'theme-color', content: '#ffffff' }
       ],
       link: [
-        { rel: 'icon', type: 'image/x-icon', href: '/socrobwebsite/socrobfavicon.ico' } // Adjusted path
+        { rel: 'icon', type: 'image/x-icon', href: '/socrobfavicon.ico' }
       ]
     }
   },
