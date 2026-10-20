@@ -1,34 +1,60 @@
 <template>
-  <section class="publications section" id="publications">
-    <h2 class="section__title">Publications</h2>
-    <span class="section__subtitle">
-      <v-icon class="publications_icon">mdi-book-open-variant-outline</v-icon>
-    </span>
+    <section class="publications section" id="publications">
+        <h2 class="section__title">Publications</h2>
+        <span class="section__subtitle">
+            <v-icon class="publications_icon" aria-hidden="true">mdi-book-open-variant-outline</v-icon>
+        </span>
 
-    <div class="publications__container container">
-      <ul class="publications__list">
-        <li v-for="(pub, index) in publications" :key="index" class="publication__item">
-          <p class="publication__text">
-            {{ pub.authors }},
-            <a :href="pub.link" target="_blank" rel="noopener" class="publication__title">
-              “{{ pub.title }}”
-            </a>,
-            {{ pub.type }}.
-          </p>
-        </li>
-      </ul>
-    </div>
+        <div class="publications__container container">
+            <p class="publications__intro">
+                Explore our work in service robotics, from perception and planning
+                to human–robot interaction and scientific competitions.
+            </p>
 
-    <!-- <p class="full-list-note">
-      If you wish to have a full list of publications, please check this
-      <a href="https://irsgroup.isr.tecnico.ulisboa.pt/projects/socrob-home/" target="_blank" class="old-website-link">
-        link
-      </a>.
-    </p> -->
-  </section>
+            <div class="publications__tools">
+                <div class="publications__field publications__field--search">
+                    <label for="publication-search">Search publications</label>
+                    <input id="publication-search" v-model="searchQuery" type="search"
+                        placeholder="Search by title or author" />
+                </div>
+                <div class="publications__field">
+                    <label for="publication-type">Publication type</label>
+                    <select id="publication-type" v-model="selectedType">
+                        <option value="">All types</option>
+                        <option v-for="type in publicationTypes" :key="type" :value="type">{{ type }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <p class="publications__count" role="status">
+                {{ filteredPublications.length }} of {{ publications.length }} publications
+            </p>
+
+            <ul v-if="filteredPublications.length" class="publications__list" aria-label="Publications">
+                <li v-for="pub in filteredPublications" :key="pub.title" class="publication-card">
+                    <span class="publication-card__type">{{ pub.type }}</span>
+                    <h3 class="publication-card__title">
+                        <a v-if="pub.link" :href="pub.link" target="_blank" rel="noopener noreferrer">
+                            {{ pub.title }}
+                            <v-icon aria-hidden="true">mdi-open-in-new</v-icon>
+                        </a>
+                        <span v-else>{{ pub.title }}</span>
+                    </h3>
+                    <p class="publication-card__authors">{{ pub.authors }}</p>
+                </li>
+            </ul>
+            <div v-else class="publications__empty">
+                <h3>No matching publications</h3>
+                <p>Try another title, author, or publication type.</p>
+                <button type="button" @click="resetFilters">Show all publications</button>
+            </div>
+        </div>
+    </section>
 </template>
 
 <script lang="ts" setup>
+import { computed, ref } from 'vue'
+
 const publications = [
   {
     title: 'Transferability Through Cooperative Competitions',
@@ -193,63 +219,27 @@ const publications = [
     link: '',
   },
 ];
+
+const searchQuery = ref('')
+const selectedType = ref('')
+const normalizeType = (type: string) => type.toLowerCase()
+const publicationTypes = [...new Set(publications.map(pub => normalizeType(pub.type)))]
+    .sort()
+    .map(type => type.charAt(0).toUpperCase() + type.slice(1))
+
+const filteredPublications = computed(() => {
+    const words = searchQuery.value.trim().toLocaleLowerCase().split(/\s+/).filter(Boolean)
+    return publications.filter(pub => {
+        const matchesType = !selectedType.value || normalizeType(pub.type) === normalizeType(selectedType.value)
+        const text = `${pub.title} ${pub.authors}`.toLocaleLowerCase()
+        return matchesType && words.every(word => text.includes(word))
+    })
+})
+
+const resetFilters = () => {
+    searchQuery.value = ''
+    selectedType.value = ''
+}
 </script>
 
-<style scoped lang="scss">
-.publications_icon {
-  font-size: var(--big-font-size);
-  color: var(--text-color);
-  opacity: 70%;
-}
-
-.publications__container {
-  max-width: 900px;
-  margin: 2rem auto;
-  padding: 0 4rem;
-}
-
-.publications__list {
-  list-style: none;
-  padding: 0;
-}
-
-.publication__item {
-  margin-bottom: 1.2rem;
-}
-
-.publication__text {
-  font-size: var(--small-font-size);
-  line-height: 1.5;
-  color: var(--text-color);
-}
-
-.publication__title {
-  color: var(--first-color);
-  text-decoration: underline;
-}
-
-.publication__title:hover {
-  color: var(--first-color-alt);
-}
-
-.full-list-note {
-  margin-top: 60px;
-  font-size: 1rem;
-  text-align: center;
-  color: #666;
-}
-
-
-
-.old-website-link {
-  color: var(--second-color);
-}
-
-@media (max-width: 650px) {
-  .full-list-note {
-    font-size: 0.9rem;
-    margin-left: 20px;
-    margin-right: 20px;
-  }
-}
-</style>
+<style scoped lang="scss" src="@/assets/publications.scss"></style>
