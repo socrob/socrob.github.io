@@ -1,77 +1,50 @@
 <template>
-  <section class="news section" id="news">
-    <h2 class="section__title">News</h2>
-    <span class="section__subtitle">
-      <v-icon class="news_icon">mdi-newspaper-variant-outline</v-icon>
-    </span>
+    <section class="news section" id="news">
+        <h2 class="section__title">News</h2>
+        <span class="section__subtitle">
+            <v-icon class="news_icon" aria-hidden="true">mdi-newspaper-variant-outline</v-icon>
+        </span>
 
-    <div class="news__container container">
-      <v-carousel
-        height="auto"
-        hide-delimiters
-        show-arrows
-        class="news-carousel"
-      >
-        <!-- Custom Prev Button -->
-        <template v-slot:prev="{ props }">
-          <v-btn
-            icon
-            @click="props.onClick"
-            class="carousel-button carousel-button--prev"
-          >
-            <v-icon>mdi-chevron-left</v-icon>
-          </v-btn>
-        </template>
+        <div class="news__container container">
+            <p class="news__intro">
+                SocRob@Home in the news: interviews, documentaries, and stories
+                about our research and competitions.
+            </p>
 
-        <!-- Custom Next Button -->
-        <template v-slot:next="{ props }">
-          <v-btn
-            icon
-            @click="props.onClick"
-            class="carousel-button carousel-button--next"
-          >
-            <v-icon>mdi-chevron-right</v-icon>
-          </v-btn>
-        </template>
-
-        <!-- Loop through news items -->
-        <v-carousel-item
-          v-for="(item, index) in news"
-          :key="index"
-          class="news__content"
-        >
-          <div class="news__data">
-            <h3 class="news__name">{{ item.title }}</h3>
-            <p class="news__type">{{ item.type }}</p>
-
-            <div class="news__info-author">
-              <p class="news__author">Source</p>
-              <p class="news__author-text">{{ item.source }}</p>
-            </div>
-
-            <v-btn
-              :href="item.link"
-              target="_blank"
-              class="button2 button--flex2"
-              variant="outlined"
-              color="primary"
-            >
-              Read More
-              <v-icon end>mdi-open-in-new</v-icon>
-            </v-btn>
-          </div>
-        </v-carousel-item>
-      </v-carousel>
-    </div>
-  </section>
+            <ul class="news__grid" aria-label="News and media coverage">
+                <li v-for="(item, index) in news" :key="item.link" class="news-card"
+                    :class="{ 'news-card--featured': index === 0 }">
+                    <article class="news-card__content">
+                        <div class="news-card__meta">
+                            <span class="news-card__type">
+                                <v-icon aria-hidden="true">{{ typeIcons[item.type] || 'mdi-newspaper-variant-outline' }}</v-icon>
+                                {{ item.type }}
+                            </span>
+                            <span class="news-card__source">{{ item.source }}</span>
+                        </div>
+                        <h3 class="news-card__title">{{ item.title }}</h3>
+                        <a :href="item.link" target="_blank" rel="noopener noreferrer"
+                            class="news-card__link" :aria-label="`View coverage: ${item.title}`">
+                            View coverage
+                            <v-icon aria-hidden="true">mdi-open-in-new</v-icon>
+                        </a>
+                    </article>
+                </li>
+            </ul>
+        </div>
+    </section>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
+<script setup lang="ts">
+const typeIcons: Record<string, string> = {
+    Interview: 'mdi-microphone-outline',
+    Documentary: 'mdi-movie-open-outline',
+    'Blog Post': 'mdi-text-box-outline',
+    Media: 'mdi-television-play',
+    Article: 'mdi-newspaper-variant-outline',
+}
 
-export default defineComponent({
-  setup() {
-    const news = ref([
+const news = [
       {
         title: 'Domestic Bob',
         type: 'Interview',
@@ -114,11 +87,7 @@ export default defineComponent({
         source: 'Técnico Lisboa/ISR',
         link: 'https://tecnico.ulisboa.pt/en/news/tecnico-team-wins-2nd-place-in-international-robotics-competition/',
       },
-    ]);
-
-    return { news };
-  },
-});
+    ]
 </script>
 
 <style scoped lang="scss" src="@/assets/news.scss"></style>
