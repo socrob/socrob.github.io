@@ -18,7 +18,7 @@
           <v-col cols="12" sm="6" md="4">
             <div class="roster__info">
               <v-avatar size="100" class="roster__avatar">
-                <img src="/team/cropped/pedroLima.jpeg" alt="Pedro Lima" />
+                <img src="/team/current_members/pedroLima.jpeg" alt="Pedro Lima" />
               </v-avatar>
               <div class="roster__name">Pedro Lima</div>
               <div class="roster__position">Project Coordinator</div>
@@ -27,7 +27,7 @@
           <v-col cols="12" sm="6" md="4">
             <div class="roster__info">
               <v-avatar size="100" class="roster__avatar">
-                <img src="/team/cropped/rodrigo.jpeg" alt="Rodrigo Serra" />
+                <img src="/team/current_members/rodrigoSerra.jpeg" alt="Rodrigo Serra" />
               </v-avatar>
               <div class="roster__name">Rodrigo Serra</div>
               <div class="roster__position">Team Leader</div>
@@ -36,7 +36,7 @@
           <v-col cols="12" sm="6" md="4">
             <div class="roster__info">
               <v-avatar size="100" class="roster__avatar">
-                <img src="/team/cropped/rui.jpeg" alt="Rui Bettencourt" />
+                <img src="/team/current_members/ruiBettencourt.jpeg" alt="Rui Bettencourt" />
               </v-avatar>
               <div class="roster__name">Rui Bettencourt</div>
               <div class="roster__position">PhD Student</div>
@@ -45,7 +45,7 @@
           <v-col cols="12" sm="6" md="4">
             <div class="roster__info">
               <v-avatar size="100" class="roster__avatar">
-                <img src="/team/cropped/afonsoCerto.jpeg" alt="Afonso Certo" />
+                <img src="/team/current_members/afonsoCerto.jpeg" alt="Afonso Certo" />
               </v-avatar>
               <div class="roster__name">Afonso Certo</div>
               <div class="roster__position">PhD Student</div>
@@ -54,79 +54,16 @@
           <v-col cols="12" sm="6" md="4">
             <div class="roster__info">
               <v-avatar size="100" class="roster__avatar">
-                <img src="/team/cropped/kevinAlcedo.jpeg" alt="Kevin Alcedo" />
+                <img src="/team/current_members/rodrigoCoimbra.jpeg" alt="Rodrigo Coimbra" />
               </v-avatar>
-              <div class="roster__name">Kevin Alcedo</div>
-              <div class="roster__position">PhD Student</div>
-            </div>
-          </v-col>
-          <v-col cols="12" sm="6" md="4">
-            <div class="roster__info">
-              <v-avatar size="100" class="roster__avatar">
-                <img src="/team/cropped/abdullah.jpeg" alt="Abdullah Alamer" />
-              </v-avatar>
-              <div class="roster__name">Abdullah Alamer</div>
-              <div class="roster__position">PhD Student</div>
-            </div>
-          </v-col>
-          <v-col cols="12" sm="6" md="4">
-            <div class="roster__info">
-              <v-avatar size="100" class="roster__avatar">
-                <img src="/team/cropped/andreSilva.jpeg" alt="André Silva" />
-              </v-avatar>
-              <div class="roster__name">André Silva</div>
+              <div class="roster__name">Rodrigo Coimbra</div>
               <div class="roster__position">Research Engineer</div>
             </div>
           </v-col>
           <v-col cols="12" sm="6" md="4">
             <div class="roster__info">
               <v-avatar size="100" class="roster__avatar">
-                <img src="/team/cropped/gabrielNunes.jpeg" alt="Gabriel Nunes" />
-              </v-avatar>
-              <div class="roster__name">Gabriel Nunes</div>
-              <div class="roster__position">Hardware Tech</div>
-            </div>
-          </v-col>
-          <v-col cols="12" sm="6" md="4">
-            <div class="roster__info">
-              <v-avatar size="100" class="roster__avatar">
-                <img src="/team/cropped/catarinaCaramalho.jpeg" alt="Catarina Caramalho" />
-              </v-avatar>
-              <div class="roster__name">Catarina Caramalho</div>
-              <div class="roster__position">MSc Student</div>
-            </div>
-          </v-col>
-          <v-col cols="12" sm="6" md="4">
-            <div class="roster__info">
-              <v-avatar size="100" class="roster__avatar">
-                <img src="/team/cropped/antonioMorais.jpeg" alt="António Morais" />
-              </v-avatar>
-              <div class="roster__name">António Morais</div>
-              <div class="roster__position">MSc Student</div>
-            </div>
-          </v-col>
-          <v-col cols="12" sm="6" md="4">
-            <div class="roster__info">
-              <v-avatar size="100" class="roster__avatar">
-                <img src="/team/cropped/rodrigoCoimbra.jpeg" alt="Rodrigo Coimbra" />
-              </v-avatar>
-              <div class="roster__name">Rodrigo Coimbra</div>
-              <div class="roster__position">MSc Student</div>
-            </div>
-          </v-col>
-          <v-col cols="12" sm="6" md="4">
-            <div class="roster__info">
-              <v-avatar size="100" class="roster__avatar">
-                <img src="/team/cropped/inesSousa.jpeg" alt="Inês Sousa" />
-              </v-avatar>
-              <div class="roster__name">Inês Sousa</div>
-              <div class="roster__position">MSc Student</div>
-            </div>
-          </v-col>
-          <v-col cols="12" sm="6" md="4">
-            <div class="roster__info">
-              <v-avatar size="100" class="roster__avatar">
-                <img src="/team/cropped/duarteSantos.jpeg" alt="Duarte Santos" />
+                <img src="/team/current_members/duarteSantos.jpeg" alt="Duarte Santos" />
               </v-avatar>
               <div class="roster__name">Duarte Santos</div>
               <div class="roster__position">MSc Student</div>
@@ -135,16 +72,43 @@
           <v-col cols="12" sm="6" md="4">
             <div class="roster__info">
               <v-avatar size="100" class="roster__avatar">
-                <img src="/team/cropped/teresaNogueira.jpeg" alt="Teresa Nogueira" />
+                <img src="/team/current_members/abdullahAlamer.jpeg" alt="Abdullah Alamer" />
               </v-avatar>
-              <div class="roster__name">Teresa Nogueira</div>
+              <div class="roster__name">Abdullah Alamer</div>
+              <div class="roster__position">PhD Student</div>
+            </div>
+          </v-col>
+          <v-col cols="12" sm="6" md="4">
+            <div class="roster__info">
+              <v-avatar size="100" class="roster__avatar">
+                <img src="/team/current_members/antonioMorais.jpeg" alt="António Morais" />
+              </v-avatar>
+              <div class="roster__name">António Morais</div>
               <div class="roster__position">MSc Student</div>
             </div>
           </v-col>
           <v-col cols="12" sm="6" md="4">
             <div class="roster__info">
               <v-avatar size="100" class="roster__avatar">
-                <img src="/team/cropped/johnnyboots.jpeg" alt="João Botas" />
+                <img src="/team/current_members/catarinaCaramalho.jpeg" alt="Catarina Caramalho" />
+              </v-avatar>
+              <div class="roster__name">Catarina Caramalho</div>
+              <div class="roster__position">MSc Student</div>
+            </div>
+          </v-col>
+          <v-col cols="12" sm="6" md="4">
+            <div class="roster__info">
+              <v-avatar size="100" class="roster__avatar">
+                <img src="/team/current_members/gonzaloMarques.jpeg" alt="Gonzalo Marques" />
+              </v-avatar>
+              <div class="roster__name">Gonzalo Marques</div>
+              <div class="roster__position">MSc Student</div>
+            </div>
+          </v-col>
+          <v-col cols="12" sm="6" md="4">
+            <div class="roster__info">
+              <v-avatar size="100" class="roster__avatar">
+                <img src="/team/current_members/joaoBotas.jpeg" alt="João Botas" />
               </v-avatar>
               <div class="roster__name">João Botas</div>
               <div class="roster__position">MSc Student</div>
@@ -153,19 +117,28 @@
           <v-col cols="12" sm="6" md="4">
             <div class="roster__info">
               <v-avatar size="100" class="roster__avatar">
-                <img src="/team/cropped/vitor.jpeg" alt="Vítor Fonseca" />
+                <img src="/team/current_members/beatrizPimenta.jpeg" alt="Beatriz Pimenta" />
               </v-avatar>
-              <div class="roster__name">Vítor Fonseca</div>
-              <div class="roster__position">BSc Student</div>
+              <div class="roster__name">Beatriz Pimenta</div>
+              <div class="roster__position">MSc Student</div>
             </div>
           </v-col>
           <v-col cols="12" sm="6" md="4">
             <div class="roster__info">
               <v-avatar size="100" class="roster__avatar">
-                <img src="/team/cropped/bea.jpeg" alt="Beatriz Pimenta" />
+                <img src="/team/current_members/gabrieleGuidotti.jpeg" alt="Gabriele Guidotti" />
               </v-avatar>
-              <div class="roster__name">Beatriz Pimenta</div>
-              <div class="roster__position">BSc Student</div>
+              <div class="roster__name">Gabriele Guidotti</div>
+              <div class="roster__position">MSc Student</div>
+            </div>
+          </v-col>
+          <v-col cols="12" sm="6" md="4">
+            <div class="roster__info">
+              <v-avatar size="100" class="roster__avatar">
+                <img src="/team/current_members/igorPonomarov.jpeg" alt="Igor Ponomarov" />
+              </v-avatar>
+              <div class="roster__name">Igor Ponomarov</div>
+              <div class="roster__position">MSc Student</div>
             </div>
           </v-col>
           <!-- Recruitment Text -->
