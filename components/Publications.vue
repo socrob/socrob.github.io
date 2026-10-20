@@ -31,16 +31,28 @@
 <script lang="ts" setup>
 const publications = [
   {
-  title: 'Robot Contests as a Catalyst for Robotics Science',
-  type: 'Journal article',
-  authors: 'Pedro U. Lima, Carlos Azevedo, Rodrigo Serra',
-  link: 'https://www.annualreviews.org/content/journals/10.1146/annurev-control-022624-012944',
+    title: 'Transferability Through Cooperative Competitions',
+    type: 'Journal article',
+    authors: 'Rodrigo Serra, Carlos Azevedo, André Silva, Kevin Alcedo, Quentin Rouxel, Peter So, Alejandro Suarez, Alin Albu-Schaeffer, and Pedro U. Lima',
+    link: 'https://ieeexplore.ieee.org/document/11690833',
+  },
+  {
+    title: 'Full-body Local Planning of a Mobile Manipulator using Reinforcement Learning',
+    type: 'Conference paper',
+    authors: 'Rodrigo Coimbra, Rui Bettencourt, Alberto Vale,Pedro U. Lima',
+    link: 'https://ieeexplore.ieee.org/abstract/document/11523319',
+  },
+  {
+    title: 'Robot Contests as a Catalyst for Robotics Science',
+    type: 'Journal article',
+    authors: 'Pedro U. Lima, Carlos Azevedo, Rodrigo Serra',
+    link: 'https://www.annualreviews.org/content/journals/10.1146/annurev-control-022624-012944',
   },
   {
     title: 'Large Language Model-Based Robot Task Planning from Voice Command Transcriptions',
     type: 'Conference paper',
     authors: 'Afonso Certo, Bruno Martins, Carlos Azevedo, Pedro U. Lima',
-    link: 'https://afonsocerto.com/files/iros2025_llm_robot_planning.pdf',
+    link: 'https://ieeexplore.ieee.org/abstract/document/11246378',
   },
   {
     title: 'Perspective-Shifted Neuro-Symbolic World Models: A Framework for Socially-Aware Robot Navigation',

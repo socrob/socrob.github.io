@@ -73,6 +73,18 @@ export default defineComponent({
   setup() {
     const news = ref([
       {
+        title: 'Domestic Bob',
+        type: 'Interview',
+        source: 'Digital EU',
+        link: 'https://www.youtube.com/watch?v=BaQrtOsDL7M',
+      },
+      {
+        title: 'Existe, IA Pensa - Part II',
+        type: 'Documentary',
+        source: 'SIC',
+        link: 'https://sicnoticias.pt/video/2024-04-04-Grande-Reportagem-SIC-Existe-IA-Pensa--Parte-II--365e8f51',
+      },
+      {
         title: 'AI-Driven Task & Motion Planning for Service Robots with Oracle Cloud Infrastructure',
         type: 'Blog Post',
         source: 'Oracle AI & Data Science Blog',
