@@ -1,124 +1,129 @@
 <template>
-    <header class="header" id="header">
-      <nav class="nav container">
-        <span class="nav__logo">SocRob@Home</span>
-        <div :class="['nav__menu', { 'show-menu': activeMenu }]" id="nav-menu">
-          <ul class="nav__list grid">
-            <li class="nav__item" v-for="(item, index) in navItems" :key="index">
-              <a
-                :href="item.link"
-                class="nav__link"
-                :class="{ 'active-link': isActiveLink(item.link) }"
-                @click="closeMenu"
-              >
-                <v-icon class="nav__icon">{{ item.icon }}</v-icon> {{ item.label }}
-              </a>
-            </li>
-            <v-icon class="mdi-close nav__close" @click="closeMenu">X</v-icon>
-          </ul>
-        </div>
-  
-        <div class="nav__btns">
-          <!-- <v-icon class="change-theme" @click="toggleDarkTheme" id="theme-button">
-            {{ themeIcon }}
-          </v-icon> -->
-          <div class="nav__toggle" @click="openMenu">
-            <v-icon>mdi-menu</v-icon>
-          </div>
-        </div>
-      </nav>
+    <header ref="headerElement" class="header" :class="{ 'header--scrolled': hasScrolled }" id="header">
+        <nav class="nav" aria-label="Main navigation" @focusout="onFocusOut">
+            <a href="#home" class="nav__logo" @click="navigateTo('#home')">SocRob@Home</a>
+
+            <div ref="menuElement" id="nav-menu" class="nav__menu" :hidden="!activeMenu && !isDesktop">
+                <ul class="nav__list">
+                    <li v-for="item in navItems" :key="item.link">
+                        <a :href="item.link" class="nav__link"
+                            :class="{ 'nav__link--active': activeSection === item.link }"
+                            :aria-current="activeSection === item.link ? 'location' : undefined"
+                            @click="navigateTo(item.link)">
+                            <v-icon class="nav__icon" aria-hidden="true">{{ item.icon }}</v-icon>
+                            {{ item.label }}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <button ref="menuButton" class="nav__toggle" type="button" aria-controls="nav-menu"
+                :aria-expanded="activeMenu" :aria-label="activeMenu ? 'Close navigation' : 'Open navigation'"
+                @click="toggleMenu">
+                <v-icon aria-hidden="true">{{ activeMenu ? 'mdi-close' : 'mdi-menu' }}</v-icon>
+            </button>
+        </nav>
     </header>
-  </template>
-  
-  <script setup lang="ts">
-  import { ref, onMounted } from 'vue'
-  import '@/assets/header.scss'
-  
-  const activeMenu = ref(false)
-  const themeIcon = ref('mdi-home-account')
-  const navItems = [
+</template>
+
+<script setup lang="ts">
+import { nextTick, onMounted, onUnmounted, ref } from 'vue'
+
+const headerElement = ref<HTMLElement | null>(null)
+const menuElement = ref<HTMLElement | null>(null)
+const menuButton = ref<HTMLButtonElement | null>(null)
+const activeMenu = ref(false)
+const isDesktop = ref(false)
+const hasScrolled = ref(false)
+const activeSection = ref('#home')
+const navItems = [
     { label: 'Home', link: '#home', icon: 'mdi-home-outline' },
     { label: 'About', link: '#about', icon: 'mdi-account-outline' },
     { label: 'Competitions', link: '#competitions', icon: 'mdi-trophy-outline' },
-    { label: 'Roster', link: '#roster', icon: 'mdi-robot-outline' },
-    { label: 'Robots', link: '#robots', icon: 'mdi-account-group-outline' },
+    { label: 'Roster', link: '#roster', icon: 'mdi-account-group-outline' },
+    { label: 'Robots', link: '#robots', icon: 'mdi-robot-outline' },
     { label: 'Publications', link: '#publications', icon: 'mdi-book-open-variant-outline' },
+    { label: 'News', link: '#news', icon: 'mdi-newspaper-variant-outline' },
     { label: 'Media', link: '#media', icon: 'mdi-youtube' },
-  ]
-  
-  // Toggles the menu visibility
-  const openMenu = () => (activeMenu.value = true)
-  const closeMenu = () => (activeMenu.value = false)
-  
-  // Handles theme switching
-  const toggleDarkTheme = () => {
-    const darkTheme = 'dark-theme'
-    const iconTheme = 'mdi-white-balance-sunny'
-    document.body.classList.toggle(darkTheme)
-    themeIcon.value = document.body.classList.contains(darkTheme) ? iconTheme : 'mdi-moon-waxing-crescent'
-    localStorage.setItem('selected-theme', document.body.classList.contains(darkTheme) ? 'dark' : 'light')
-    localStorage.setItem('selected-icon', themeIcon.value)
-    updateFavicon()
-  }
-  
-  // Determines the active link based on scroll position
-  const isActiveLink = (link) => {
-    if (process.client) {
-        return window.location.hash === link
-    }
-    return false
-    }
-    
-// Updates favicon based on theme
-const updateFavicon = () => {
-  const favicon = document.getElementById('favicon') as HTMLLinkElement;
-  console.log("Updating favicon...");
-  console.log(favicon); // Debugging statement
-  if (favicon) {
-    favicon.href = document.body.classList.contains('dark-theme')
-      ? '/public/socrobfavicon.ico'  // Use root-relative path
-      : '/public/socrobfavicon.ico';  // Use root-relative path
-  } else {
-    console.error("Favicon element not found.");
-  }
+]
+
+const closeMenu = (restoreFocus = false) => {
+    activeMenu.value = false
+    if (restoreFocus) menuButton.value?.focus()
 }
-  
-  // Adds scroll listeners for dynamic header styling
-  onMounted(() => {
-    const selectedTheme = localStorage.getItem('selected-theme')
-    const selectedIcon = localStorage.getItem('selected-icon')
-    const darkTheme = 'dark-theme'
-  
-    if (selectedTheme) {
-      document.body.classList[selectedTheme === 'dark' ? 'add' : 'remove'](darkTheme)
-      themeIcon.value = selectedIcon || 'mdi-moon-waxing-crescent'
-      updateFavicon()
+
+const toggleMenu = async () => {
+    if (activeMenu.value) {
+        closeMenu()
+        return
     }
-  
-    window.addEventListener('scroll', () => {
-      const scrollY = window.scrollY
-      const header = document.getElementById('header')
-      if (scrollY >= 80) {
-        header.classList.add('scroll-header')
-      } else {
-        header.classList.remove('scroll-header')
-      }
-  
-      document.querySelectorAll('section[id]').forEach((section) => {
-        const sectionTop = section.offsetTop - 50
-        const sectionHeight = section.offsetHeight
-        const sectionId = section.getAttribute('id')
-        const link = document.querySelector(`.nav__menu a[href*="${sectionId}"]`)
-  
-        if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
-          link.classList.add('active-link')
-        } else {
-          link.classList.remove('active-link')
-        }
-      })
-    })
-  })
-  </script>
-  
-  <style scoped lang="scss" src="@/assets/header.scss"></style>
-  
+    activeMenu.value = true
+    await nextTick()
+    menuElement.value?.querySelector<HTMLAnchorElement>('a')?.focus()
+}
+
+const navigateTo = (link: string) => {
+    activeSection.value = link
+    closeMenu(activeMenu.value)
+}
+
+const onKeydown = (event: KeyboardEvent) => {
+    if (event.key === 'Escape' && activeMenu.value) {
+        event.preventDefault()
+        closeMenu(true)
+    }
+}
+
+const onPointerDown = (event: PointerEvent) => {
+    if (activeMenu.value && !headerElement.value?.contains(event.target as Node)) closeMenu()
+}
+
+const onFocusOut = (event: FocusEvent) => {
+    if (event.relatedTarget && !headerElement.value?.contains(event.relatedTarget as Node)) closeMenu()
+}
+
+let frame: number | null = null
+const updateNavigation = () => {
+    frame = null
+    hasScrolled.value = window.scrollY >= 24
+    isDesktop.value = window.innerWidth >= 1024
+    if (isDesktop.value) closeMenu()
+    const offset = window.innerWidth >= 768 ? (headerElement.value?.offsetHeight ?? 72) + 20 : 20
+    let current = '#home'
+    for (const item of navItems) {
+        const section = document.getElementById(item.link.slice(1))
+        if (section && section.getBoundingClientRect().top <= offset) current = item.link
+    }
+    activeSection.value = current
+}
+
+const scheduleUpdate = () => {
+    if (frame === null) frame = window.requestAnimationFrame(updateNavigation)
+}
+
+onMounted(() => {
+    try {
+        const selectedTheme = localStorage.getItem('selected-theme')
+        if (selectedTheme) document.body.classList.toggle('dark-theme', selectedTheme === 'dark')
+    } catch {
+        // Navigation remains available when browser storage is disabled.
+    }
+    updateNavigation()
+    window.addEventListener('scroll', scheduleUpdate, { passive: true })
+    window.addEventListener('resize', scheduleUpdate)
+    window.addEventListener('hashchange', scheduleUpdate)
+    document.addEventListener('keydown', onKeydown)
+    document.addEventListener('pointerdown', onPointerDown)
+})
+
+onUnmounted(() => {
+    if (frame !== null) window.cancelAnimationFrame(frame)
+    window.removeEventListener('scroll', scheduleUpdate)
+    window.removeEventListener('resize', scheduleUpdate)
+    window.removeEventListener('hashchange', scheduleUpdate)
+    document.removeEventListener('keydown', onKeydown)
+    document.removeEventListener('pointerdown', onPointerDown)
+})
+</script>
+
+<style scoped lang="scss" src="@/assets/header.scss"></style>

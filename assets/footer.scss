@@ -37,11 +37,17 @@
 .footer__socials {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
 }
   
 .footer__social {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
     font-size: 1.25rem;
-    margin-right: var(--mb-1-5);
 }
   
 .footer__social:hover {
@@ -62,7 +68,7 @@
 .footer__copy {
     font-size: var(--smaller-font-size);
     text-align: center;
-    color: var(--text-color-light);
+    color: #fff;
     margin-top: var(--mb-2);
 }
   
@@ -122,7 +128,9 @@
   
 @media screen and (max-width: 768px) {
     .footer__sponsors {
-        flex-direction: column; /* Stack logos vertically */
+        flex-direction: row;
+        justify-content: center;
+        gap: 1.5rem 2rem;
         align-items: center; /* Center logos horizontally */
         padding-left: 0; /* Remove left padding */
         padding-right: 0; /* Remove right padding */
@@ -131,7 +139,7 @@
 
     .footer__sponsor-logo {
         margin-bottom: 1rem; /* Add spacing between stacked logos */
-        max-width: 100%; /* Ensure logos fit well within smaller screens */
+        max-width: 120px;
         height: auto; /* Maintain aspect ratio */
     }
 
@@ -185,5 +193,28 @@
     .footer__icon {
         width: 200px; 
         height: 200px;
+    }
+}
+
+.footer__mail a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+}
+
+.footer__address {
+    display: flex;
+    font-style: normal;
+}
+
+.footer a:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 4px;
+    border-radius: 0.25rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .footer__sponsor-logo {
+        transition: none;
     }
 }
