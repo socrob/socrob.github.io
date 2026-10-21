@@ -24,7 +24,7 @@
 
                 <div class="about__introduction">
                     <span class="about__eyebrow">SocRob@Home · Lisbon</span>
-                    <h3>Building robots for everyday life</h3>
+                    <h3>Advancing autonomous service robotics</h3>
                     <p>
                         We bring together research in autonomous robots and human–robot
                         interaction to explore how robots can understand, assist, and
